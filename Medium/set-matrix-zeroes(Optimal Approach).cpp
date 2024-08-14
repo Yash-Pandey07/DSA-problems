@@ -1,72 +1,64 @@
 //https://leetcode.com/problems/set-matrix-zeroes/description/
+//https://algo.monster/liteproblems/73
 
 #include <bits/stdc++.h>
 using namespace std;
 
-vector<vector<int>> zeroMatrix(vector<vector<int>> &matrix, int n, int m) {
+class Solution {
+public:
+    void setZeroes(vector<vector<int>>& matrix) {
+        int rowCount = matrix.size(), colCount = matrix[0].size();
+        bool firstRowHasZero = false, firstColHasZero = false;
 
-    // int row[n] = {0}; --> matrix[..][0]
-    // int col[m] = {0}; --> matrix[0][..]
-
-    int col0 = 1;
-    // step 1: Traverse the matrix and
-    // mark 1st row & col accordingly:
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < m; j++) {
-            if (matrix[i][j] == 0) {
-                // mark i-th row:
-                matrix[i][0] = 0;
-
-                // mark j-th column:
-                if (j != 0)
-                    matrix[0][j] = 0;
-                else
-                    col0 = 0;
+        // Check if the first row has a zero
+        for (int col = 0; col < colCount; ++col) {
+            if (matrix[0][col] == 0) {
+                firstRowHasZero = true;
+                break;
             }
         }
-    }
 
-    // Step 2: Mark with 0 from (1,1) to (n-1, m-1):
-    for (int i = 1; i < n; i++) {
-        for (int j = 1; j < m; j++) {
-            if (matrix[i][j] != 0) {
-                // check for col & row:
-                if (matrix[i][0] == 0 || matrix[0][j] == 0) {
-                    matrix[i][j] = 0;
+        // Check if the first column has a zero
+        for (int row = 0; row < rowCount; ++row) {
+            if (matrix[row][0] == 0) {
+                firstColHasZero = true;
+                break;
+            }
+        }
+
+        // Use first row and column as markers, set matrix[i][0] and matrix[0][j] to 0 if matrix[i][j] is 0
+        for (int row = 1; row < rowCount; ++row) {
+            for (int col = 1; col < colCount; ++col) {
+                if (matrix[row][col] == 0) {
+                    matrix[row][0] = 0;
+                    matrix[0][col] = 0;
                 }
             }
         }
-    }
 
-    //step 3: Finally mark the 1st col & then 1st row:
-    if (matrix[0][0] == 0) {
-        for (int j = 0; j < m; j++) {
-            matrix[0][j] = 0;
+        // Iterate over the matrix, set elements to 0 if their row or column marker is 0
+        for (int row = 1; row < rowCount; ++row) {
+            for (int col = 1; col < colCount; ++col) {
+                if (matrix[row][0] == 0 || matrix[0][col] == 0) {
+                    matrix[row][col] = 0;
+                }
+            }
+        }
+
+        // If the first row had zero, set all elements in the first row to 0
+        if (firstRowHasZero) {
+            for (int col = 0; col < colCount; ++col) {
+                matrix[0][col] = 0;
+            }
+        }
+
+        // If the first column had zero, set all elements in the first column to 0
+        if (firstColHasZero) {
+            for (int row = 0; row < rowCount; ++row) {
+                matrix[row][0] = 0;
+            }
         }
     }
-    if (col0 == 0) {
-        for (int i = 0; i < n; i++) {
-            matrix[i][0] = 0;
-        }
-    }
+};
 
-    return matrix;
-}
-
-int main()
-{
-    vector<vector<int>> matrix = {{1, 1, 1}, {1, 0, 1}, {1, 1, 1}};
-    int n = matrix.size();
-    int m = matrix[0].size();
-    vector<vector<int>> ans = zeroMatrix(matrix, n, m);
-
-    cout << "The Final matrix is: n";
-    for (auto it : ans) {
-        for (auto ele : it) {
-            cout << ele << " ";
-        }
-        cout << "n";
-    }
-    return 0;
-}
 
