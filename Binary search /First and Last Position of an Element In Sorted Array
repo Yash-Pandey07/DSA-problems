@@ -1,26 +1,49 @@
 //https://www.naukri.com/code360/problems/first-and-last-position-of-an-element-in-sorted-array_1082549
-#include<bits/stdc++.h>
 
-using namespace std;
+#include <bits/stdc++.h> 
+int lowerBound(vector<int> arr, int n, int x) {
+    int low = 0, high = n - 1;
+    int ans = n;
 
-int solve(int n, int key, vector < int > & v) {
-  int res = -1;
-  for (int i = n - 1; i >= 0; i--) {
-    if (v[i] == key) {
-      res = i;
-      break;
+    while (low <= high) {
+        int mid = (low + high) / 2;
+        // maybe an answer
+        if (arr[mid] >= x) {
+            ans = mid;
+            //look for smaller index on the left
+            high = mid - 1;
+        }
+        else {
+            low = mid + 1; // look on the right
+        }
     }
-  }
-  return res;
+    return ans;
 }
 
-int main() {
-  int n = 7;
-  int key = 13;
-  vector < int > v = {3,4,13,13,13,20,40};
-   
-  // returning the last occurrence index if the element is present otherwise -1
-  cout << solve(n, key, v) << "\n";
+int upperBound(vector<int> &arr, int n, int x) {
+    int low = 0, high = n - 1;
+    int ans = n;
 
-  return 0;
+    while (low <= high) {
+        int mid = (low + high) / 2;
+        // maybe an answer
+        if (arr[mid] > x) {
+            ans = mid;
+            //look for smaller index on the left
+            high = mid - 1;
+        }
+        else {
+            low = mid + 1; // look on the right
+        }
+    }
+    return ans;
+}
+
+pair<int, int> firstAndLastPosition(vector<int>& arr, int n, int k)
+{
+    // Write your code here
+    int lb = lowerBound(arr,n ,k);
+    if(lb ==n || arr[lb]!=k) return {-1 , -1};
+    return {lb , upperBound(arr, n, k)-1 };
+    
 }
