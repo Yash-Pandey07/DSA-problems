@@ -9,6 +9,12 @@ int findMin(vector<int>& arr) {
     while (low <= high) {
         int mid = (low + high) / 2;
 
+         //added one more check to stop futher binary search
+		while(arr[low] <= arr[high]){
+			ans =  min(ans, arr[low]);
+			break ;
+		}
+
         //if left part is sorted:
         if (arr[low] <= arr[mid]) {
             // keep the minimum:
