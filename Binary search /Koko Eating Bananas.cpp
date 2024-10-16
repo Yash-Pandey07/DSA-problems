@@ -15,7 +15,8 @@ long long calculateTotalHours(vector<int> &v, int hourly) {
     long long totalH = 0;
     int n = v.size();
     for (int i = 0; i < n; i++) {
-        totalH += (v[i] + hourly - 1) / hourly; // This avoids using ceil and ensures integer division
+        totalH += ceil((double)(v[i]) / (double)(hourly));
+        // Either of these will work totalH += (v[i] + hourly - 1) / hourly; // This avoids using ceil and ensures integer division
     }
     return totalH;
 }
@@ -24,7 +25,7 @@ int minimumRateToEatBananas(vector<int> v, int h) {
     int low = 1, high = findMax(v);
     while (low <= high) {
         int mid = low + (high - low) / 2; // Avoid potential overflow
-        long long totalH = calculateTotalHours(v, mid);
+        long long totalH = calculateTotalHours(v, mid);        //taking long long for case of overflow
 
         //cout << "low: " << low << ", high: " << high << ", mid: " << mid << ", totalH: " << totalH << endl;
 
