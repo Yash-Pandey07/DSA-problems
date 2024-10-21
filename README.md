@@ -28,6 +28,12 @@ In this repository, I solve and save solutions to different DSA questions. The a
 ## Contributing
 Contributions are welcome! If you have a solution to a DSA problem that is not covered in this repository, feel free to create a pull request.
 
+
+## Latest DSA News
+
+Stay updated with the latest DSA news and problems:
+
+```python
 import requests
 from bs4 import BeautifulSoup
 
@@ -43,3 +49,4 @@ def fetch_latest_dsa_news():
         print(f'Title: {title}\nLink: {link}\n')
 
 fetch_latest_dsa_news()
+```
