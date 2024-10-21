@@ -27,3 +27,19 @@ In this repository, I solve and save solutions to different DSA questions. The a
 
 ## Contributing
 Contributions are welcome! If you have a solution to a DSA problem that is not covered in this repository, feel free to create a pull request.
+
+import requests
+from bs4 import BeautifulSoup
+
+def fetch_latest_dsa_news():
+    url = 'https://www.geeksforgeeks.org/category/algorithm/'
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    articles = soup.find_all('article', class_='type-post')
+    
+    for article in articles[:5]:  # Fetch the latest 5 articles
+        title = article.find('h2', class_='entry-title').text
+        link = article.find('a')['href']
+        print(f'Title: {title}\nLink: {link}\n')
+
+fetch_latest_dsa_news()
