@@ -6,10 +6,8 @@ Welcome to the **DSA Problems** repository! This repository contains solutions t
 
 - Introduction
 - Languages Used
-- Folder Structure
 - How to Use
 - Contributing
-- License
 
 ## Introduction
 
