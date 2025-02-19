@@ -2,7 +2,7 @@
 
 
 class Solution {
-    public int evalRPN(String[] tokens) {
+    public int evalRPN(String[] tokens) { 
         Stack<Integer> stack = new Stack<>();
 
         for(String token : tokens){
