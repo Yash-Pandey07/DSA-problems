@@ -5,6 +5,7 @@ class Solution {
         int maxArea = 0;
         Stack<Integer> stack = new Stack<>();
         int n = heights.length;
+        
 
         for(int i = 0;  i <= n ; i++){
             int currentHeight = (i == n) ? 0 : heights[i];
