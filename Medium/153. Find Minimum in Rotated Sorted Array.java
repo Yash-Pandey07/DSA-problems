@@ -20,7 +20,8 @@ class Solution {
 
         if(nums[left] <=  nums[mid]){
             left = mid+1;
-        }else{
+        }
+        else{
             right = mid-1;
         }
     }
