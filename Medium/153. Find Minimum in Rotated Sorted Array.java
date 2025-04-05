@@ -15,7 +15,6 @@ class Solution {
                 ans = Math.min(ans, nums[left]);
             }
             
-            
         int mid = left + (right - left)/ 2;
         ans = Math.min(ans, nums[mid]);
 
